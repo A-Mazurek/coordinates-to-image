@@ -1,5 +1,5 @@
 import folium
-import Html2Image
+from html2image import Html2Image
 import click
 
 
@@ -10,10 +10,10 @@ import click
 @click.option('--size', 'size', help="Enter size map in tuple e.g. (400, 400)")
 def entrypoint(coordinates, output_image, zoom_start, size):
     m = folium.Map(location=coordinates, zoom_start=zoom_start, zoomControl=False)
-    m.save('coordinates_map.html')
+    m.save('tmp/coordinates_map.html')
 
     hti = Html2Image(custom_flags=['--virtual-time-budget=10000', '--hide-scrollbars'])
-    hti.screenshot(html_file='coordinates_map.html', save_as=output_image, size=size)
+    hti.screenshot(html_file='tmp/coordinates_map.html', save_as=output_image, size=size)
 
 
 if __name__ == '__main__':
